@@ -1,0 +1,43 @@
+Source: sbc
+Section: libs
+Priority: optional
+Maintainer: Debian Bluetooth Maintainers <team+pkg-bluetooth@tracker.debian.org>
+Uploaders: Nobuhiro Iwamatsu <iwamatsu@debian.org>
+Build-Depends: debhelper-compat (= 13), pkg-config
+Standards-Version: 4.5.1
+Homepage: https://www.bluez.org/
+Vcs-Git: https://salsa.debian.org/bluetooth-team/sbc.git
+Vcs-Browser: https://salsa.debian.org/bluetooth-team/sbc
+
+Package: libsbc1
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Sub Band CODEC library - runtime
+ This provides the library and tool which operate SBC
+ (sub band codec) in A2DP (the Advanced Audio Distribution Profile).
+ .
+ This package contains the sbc runtime library.
+
+Package: libsbc-dev
+Architecture: any
+Multi-Arch: same
+Section: libdevel
+Depends: ${misc:Depends}, libsbc1 (= ${binary:Version})
+Description: Sub Band CODEC library - development
+ This provides the library and tool which operate SBC
+ (sub band codec) in A2DP (the Advanced Audio Distribution Profile).
+ .
+ This package contains the header files and static library needed to
+ compile applications that use libsbc.
+
+Package: sbc-tools
+Architecture: any
+Section: utils
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Sub Band CODEC library - tools
+ This provides the library and tool which operate SBC
+ (sub band codec) in A2DP (the Advanced Audio Distribution Profile).
+ .
+ This package contains the tools for SBC.
