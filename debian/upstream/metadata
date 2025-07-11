@@ -1,2 +1,5 @@
+Name: sbc
 Repository: https://git.kernel.org/pub/scm/bluetooth/sbc.git
 Repository-Browse: https://git.kernel.org/pub/scm/bluetooth/sbc.git/
+Bug-Submit: linux-bluetooth@vger.kernel.org
+Contact: linux-bluetooth@vger.kernel.org

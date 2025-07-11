@@ -2,7 +2,9 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-CONFIGURE_OPTION = --disable-tester --disable-silent-rules
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all optimize=+lto
+
+CONFIGURE_OPTION = --disable-tester --disable-silent-rules --enable-static
 # for armhf arch
 ifeq ($(DEB_HOST_ARCH),armhf)
 CONFIGURE_OPTION += --enable-high-precision

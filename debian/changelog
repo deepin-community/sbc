@@ -1,3 +1,30 @@
+sbc (2.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * d/docs: Remove NEWS.
+  * d/control:
+    - Use pkgconf instead of pkg-config to B-D.
+    - Bump Standards-Version to 4.7.2 (no changes needed).
+  * d/copyright: Update copyright year.
+
+ -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Sat, 12 Apr 2025 13:29:53 +0900
+
+sbc (2.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Update d/control.
+    - Bumped Standards-Version to 4.6.1.
+    - Add Rules-Requires-Root: no.
+  * Update d/rules.
+    - Add --enable-static to option of configure.
+    - Enable hardening=+all and LTO optimize.
+  * Update d/copyright.
+    - Refresh copyright.
+  * Add DEP 12 metadata file.
+  * Drop d/patches/0002-sbc_primitives-Fix-build-on-non-x86.patch.
+
+ -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Wed, 03 Aug 2022 16:04:23 +0900
+
 sbc (1.5-3) unstable; urgency=medium
 
   * Fix build on non-x86 archs. (Closes: #977666)
