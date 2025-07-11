@@ -1,28 +1,12 @@
 /*
+ * Bluetooth low-complexity, subband codec (SBC) library
+ * Copyright (C) 2004-2010  Marcel Holtmann <marcel@holtmann.org>
+ * Copyright (C) 2004-2005  Henryk Ploetz <henryk@ploetzli.ch>
+ * Copyright (C) 2005-2006  Brad Midgley <bmidgley@xmission.com>
+ * Copyright (C) 2008-2010  Nokia Corporation
+ * Copyright (C) 2012-2013  Intel Corporation
  *
- *  Bluetooth low-complexity, subband codec (SBC) library
- *
- *  Copyright (C) 2008-2010  Nokia Corporation
- *  Copyright (C) 2004-2010  Marcel Holtmann <marcel@holtmann.org>
- *  Copyright (C) 2004-2005  Henryk Ploetz <henryk@ploetzli.ch>
- *  Copyright (C) 2005-2006  Brad Midgley <bmidgley@xmission.com>
- *  Copyright (C) 2012-2013  Intel Corporation
- *
- *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Lesser General Public
- *  License as published by the Free Software Foundation; either
- *  version 2.1 of the License, or (at your option) any later version.
- *
- *  This library is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public
- *  License along with this library; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- *
+ * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #include <stdint.h>
@@ -593,6 +577,7 @@ static int sbc_calc_scalefactors_j(
 
 static void sbc_init_primitives_x86(struct sbc_encoder_state *state)
 {
+#if defined(__x86_64__) || defined(__i386__)
 	__builtin_cpu_init();
 
 #ifdef SBC_BUILD_WITH_MMX_SUPPORT
@@ -603,6 +588,7 @@ static void sbc_init_primitives_x86(struct sbc_encoder_state *state)
 #ifdef SBC_BUILD_WITH_SSE_SUPPORT
 	if (__builtin_cpu_supports("sse4.2"))
 		sbc_init_primitives_sse(state);
+#endif
 #endif
 }
 

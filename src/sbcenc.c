@@ -1,26 +1,10 @@
 /*
+ * Bluetooth low-complexity, subband codec (SBC) encoder
+ * Copyright (C) 2004-2010  Marcel Holtmann <marcel@holtmann.org>
+ * Copyright (C) 2008-2010  Nokia Corporation
+ * Copyright (C) 2012-2013  Intel Corporation
  *
- *  Bluetooth low-complexity, subband codec (SBC) encoder
- *
- *  Copyright (C) 2008-2010  Nokia Corporation
- *  Copyright (C) 2004-2010  Marcel Holtmann <marcel@holtmann.org>
- *  Copyright (C) 2012-2013  Intel Corporation
- *
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- *
+ * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
 #ifdef HAVE_CONFIG_H
@@ -89,6 +73,8 @@ static void encode(char *filename, int subbands, int bitpool, int joint,
 		goto done;
 	}
 
+	srate = BE_INT(au_hdr.sample_rate);
+
 	if (!msbc) {
 		sbc_init(&sbc, 0L);
 
@@ -110,8 +96,6 @@ static void encode(char *filename, int subbands, int bitpool, int joint,
 					BE_INT(au_hdr.sample_rate));
 			goto done;
 		}
-
-		srate = BE_INT(au_hdr.sample_rate);
 
 		sbc.subbands = subbands == 4 ? SBC_SB_4 : SBC_SB_8;
 
@@ -141,8 +125,7 @@ static void encode(char *filename, int subbands, int bitpool, int joint,
 				blocks == 8 ? SBC_BLK_8 :
 					blocks == 12 ? SBC_BLK_12 : SBC_BLK_16;
 	} else {
-		if (BE_INT(au_hdr.sample_rate) != 16000 ||
-				BE_INT(au_hdr.channels) != 1) {
+		if (srate != 16000 || BE_INT(au_hdr.channels) != 1) {
 			fprintf(stderr, "mSBC requires 16 bits, 16kHz, mono "
 								"input\n");
 			goto done;
